@@ -1,8 +1,14 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+
+
+
 
 /* GET restaurants listing. */
 router.get('/', function(req, res, next) {
+  //console.log(process.env);
+  console.log(`Your API key is: ${process.env.API_KEY}`);
+
   res.render('restaurants/restaurant-list');
 });
 

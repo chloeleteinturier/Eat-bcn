@@ -8,6 +8,9 @@ const logger = require('morgan');
 const router = require('./routes/index');
 const privateRouter = require('./routes/private');
 
+const dotenv = require('dotenv'); // to access the api key
+dotenv.config();
+
 const app = express();
 
 // view engine setup
