@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -8,7 +8,7 @@ const logger = require('morgan');
 const router = require('./routes/index');
 const privateRouter = require('./routes/private');
 
-const dotenv = require('dotenv'); // to access the api key
+const dotenv = require('dotenv'); // to save API key
 dotenv.config();
 
 const app = express();
@@ -27,7 +27,7 @@ app.use('/', router);
 app.use('/private', privateRouter);
 
 // catch 404 and forward to error handler
-app.use((req, res, next) =>{
+app.use((req, res, next) => {
   next(createError(404));
 });
 
