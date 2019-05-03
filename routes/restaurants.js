@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 /* GET restaurants listing. */
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
   //console.log(process.env);
   console.log(`Your API key is: ${process.env.API_KEY}`);
 
@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET restaurants listing. */
-router.get('/details', function(req, res, next) {
+router.get('/details', (req, res, next) => {
   res.render('restaurants/restaurant-details');
 });
 
