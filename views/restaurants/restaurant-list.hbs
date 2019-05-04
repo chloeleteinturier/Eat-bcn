@@ -1,5 +1,15 @@
-restaurant list
 
-  {{#each restaurants}}
-  <p>{{this.name}}</p>
-  {{/each}}
+{{#each newRestaurants}}
+<div style="border:1px solid black; margin-bottom:10px;padding:10px;">
+  <div style="float:left; width:120px;">
+  <p><img src="{{this.main_photo}}" style="width:100px; height:auto;"></p>
+  </div>
+  <div style="float:left; width:250px;">
+  <p><a href="restaurants/detail?place_id={{this.place_id}}">{{this.name}}</a> <span class="price{{this.price_level}}"><span></p>
+  <p>{{this.rating}} ({{this.user_ratings_total}} reviews)</p>
+  </div>
+  <br clear="all">
+</div>
+{{/each}}
+ 
+<p><a href="/restaurants?type={{newRestaurants.[0].type}}&next_page_token={{newRestaurants.[0].next_page_token}}">Next</a></p>

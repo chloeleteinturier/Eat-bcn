@@ -6,3 +6,23 @@ body {
 a {
   color: #00B7FF;
 }
+
+.price1:after{
+  content: "$";
+}
+
+.price2:after{
+  content: "$$";
+}
+
+
+.price3:after{
+  content: "$$$";
+  
+}
+
+
+.price4:after{
+  content: "$$$$";
+}
+
