@@ -4,6 +4,12 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const mongoose = require('mongoose');
+const SECRET = 'paella';
+
+// Modules used for sessions
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 const router = require('./routes/index');
 const privateRouter = require('./routes/private');
@@ -17,12 +23,32 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
+// connect moongoose
+mongoose.connect('mongodb://localhost/eat-bcn-auth', {
+  keepAlive: true,
+  useNewUrlParser: true,
+  reconnectTries: Number.MAX_VALUE
+});
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Session middleware
+app.use(session({
+  secret: SECRET,
+  cookie: { maxAge: 10000 * 1 }, // 1 hour
+  resave: false,
+  saveUninitialized: false,
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // Time to live - 1 day
+  })
+}));
+
+// Routes
 app.use('/', router);
 app.use('/private', privateRouter);
 

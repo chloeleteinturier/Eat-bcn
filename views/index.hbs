@@ -1,5 +1,83 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
-<p><a href="restaurants?type=italiano">Italiano</a></p>
-<p><a href="restaurants?type=chino">chino</a></p>
-<p><a href="restaurants?type=japones">japonés</a></p>
+<h1><strong>Eat</strong><small>.bcn</small></h1>
+<br>
+<p><a href="login">Login</a> or <a href="signup">signup</a></p>
+
+<br>
+<br>
+<h2>Types of restaurant</h2>
+
+<br>
+<ul>
+  <li><a href="restaurants">Todo</a></li>
+  <li><a href="restaurants?type=africano">Africano</a></li>
+  <li><a href="restaurants?type=aleman">Alemán</a></li>
+  <li><a href="restaurants?type=americano">Americano</a></li>
+  <li><a href="restaurants?type=andaluz">Andaluz</a></li>
+  <li><a href="restaurants?type=arabe">Árabe</a></li>
+  <li><a href="restaurants?type=argentino">Argentino</a></li>
+  <li><a href="restaurants?type=arroceria">Arrocería</a></li>
+  <li><a href="restaurants?type=asador">Asador</a></li>
+  <li><a href="restaurants?type=asiatico">Asiático</a></li>
+  <li><a href="restaurants?type=asturiano">Asturiano</a></li>
+  <li><a href="restaurants?type=belga">Belga</a></li>
+  <li><a href="restaurants?type=brasileno">Brasileño</a></li>
+
+</ul>
+<br><br>
+
+{{!-- Brasileño
+Camboyano
+Castellano
+Catalán
+Chino
+De mercado
+Colombiano
+Coreano
+Creativo
+Crepería
+Cubano
+De Fusión
+Egipcio
+Español
+Etíope
+Europa del Este
+Extremeño
+Francés
+Gallego
+Griego
+Indio
+Inglés
+Internacional
+Iraní
+Italiano
+Japonés
+Latino
+Libanés
+Marisquería
+Marroquí
+Mediterráneo
+Mexicano
+Navarro
+Peruano
+Portugués
+Ruso
+Suizo
+Tailandés
+Turco
+Valenciano
+Vasco
+Vegetariano
+Vietnamita --}}
+
+
+
+<form action="/restaurants"  method="get">
+  <div class="form-row align-items-center">
+    <div class="col-auto">
+      <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Search by keyword"  name="type" >
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary mb-2">Search</button>
+    </div>
+  </div>
+</form>

@@ -1,10 +1,27 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color:#eee;
 }
 
 a {
-  color: #00B7FF;
+  color: #4500D7;
+}
+a:hover {
+  color: #4500D7;
+}
+
+.btn-primary{
+  background-color: #4500D7;
+  border:0px solid transparent;
+}
+.btn-primary:hover{
+  background-color: #4500D7;
+  border:0px solid transparent;
+}
+
+.card a:hover{
+  background-color:#eee;
 }
 
 .price1:after{

@@ -48,13 +48,14 @@ router.get('/', (req, res, next) => {
       //   // return axios.get(`${feedPhoto}${result.photos[0].photo_reference}&key=${process.env.API_KEY}`);
       // });
 
-      console.log(newRestaurants);
-      return newRestaurants;
-    })
-    .then((newRestaurants) => Promise.all(newRestaurants))
-    .then((newRestaurants) => {
+      // console.log(newRestaurants);
+      // return newRestaurants;
       res.render('restaurants/restaurant-list', { newRestaurants });
     })
+    // .then((newRestaurants) => Promise.all(newRestaurants))
+    // .then((newRestaurants) => {
+    //   res.render('restaurants/restaurant-list', { newRestaurants });
+    // })
     .catch(function (error) {
       console.log(error);
     });
@@ -62,7 +63,17 @@ router.get('/', (req, res, next) => {
 
 /* GET restaurants listing. */
 router.get('/details', (req, res, next) => {
-  res.render('restaurants/restaurant-details');
+  const { place_id } = req.query;
+  // console.log(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${place_id}&key=${process.env.API_KEY}`);
+  axios.get(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${place_id}&key=${process.env.API_KEY}`)
+    .then(function (response) {
+      const restaurantDetails = response.data.result;
+      // console.log(restaurantDetails);
+      res.render('restaurants/restaurant-details', { restaurantDetails });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 });
 
 module.exports = router;

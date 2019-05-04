@@ -1,1 +1,16 @@
-restaurant details
+<p><a href="/">home</a> / <a href="javascript:window.history.back()">results</a> </p>
+
+
+
+<img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={{restaurantDetails.photos.[0].photo_reference}}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw">
+<p><h2>{{restaurantDetails.name}} <span class="price{{restaurantDetails.price_level}}"></span></h2> </p>
+<p>{{restaurantDetails.formatted_phone_number}}</p>
+<p>{{restaurantDetails.vicinity}}</p>
+<p>{{restaurantDetails.rating}} ({{restaurantDetails.user_ratings_total}} reviews)</p>
+<p><a href="{{restaurantDetails.website}}">Web</a></p>
+
+<div style="display:grid | inline-grid">
+{{#each restaurantDetails.photos}}
+<img style="padding-right:10px; padding-bottom:10px;" src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=100&photoreference={{this.photo_reference}}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw">
+{{/each}} 
+</div>

@@ -1,15 +1,45 @@
+<p><a href="/">home</a></p>
 
 {{#each newRestaurants}}
-<div style="border:1px solid black; margin-bottom:10px;padding:10px;">
-  <div style="float:left; width:120px;">
-  <p><img src="{{this.main_photo}}" style="width:100px; height:auto;"></p>
+
+
+  <div class="card mb-3" >
+    <div class="row no-gutters">
+      <div class="col-md-2" style="max-height: 100px; overflow:hidden;">
+        <a href="restaurants/details?place_id={{this.place_id}}" class="stretched-link"></a><img src="{{this.main_photo}}" class="card-img" alt="..."></a>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title"><a href="restaurants/details?place_id={{this.place_id}}" class="stretched-link">{{this.name}}</a> <small class="text-muted"><span class="price{{this.price_level}}"><span></small></h5>
+          <p class="card-text"><strong>{{this.rating}}</strong> ({{this.user_ratings_total}} reviews)</p>
+        </div>
+      </div>
+    </div>
   </div>
-  <div style="float:left; width:250px;">
-  <p><a href="restaurants/detail?place_id={{this.place_id}}">{{this.name}}</a> <span class="price{{this.price_level}}"><span></p>
-  <p>{{this.rating}} ({{this.user_ratings_total}} reviews)</p>
-  </div>
-  <br clear="all">
-</div>
+
+
+
+{{!-- 
+<div class="card float-left">
+    <div class="row ">
+
+      <div class="col-sm-7">
+        <div class="card-block">
+          <!--           <h4 class="card-title">Small card</h4> -->
+          <p>Wetgple text to build your own card.</p>
+          <p>Change around the content for awsomenes</p>
+          <a href="#" class="btn btn-primary btn-sm">Read More</a>
+        </div>
+      </div>
+
+      <div class="col-sm-5">
+        <img class="d-block w-100" src="https://picsum.photos/150?image=380" alt="">
+      </div>
+    </div>
+  </div> --}}
+
+
 {{/each}}
- 
+{{#if newRestaurants.[0].next_page_token}}
 <p><a href="/restaurants?type={{newRestaurants.[0].type}}&next_page_token={{newRestaurants.[0].next_page_token}}">Next</a></p>
+{{/if}}
