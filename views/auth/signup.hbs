@@ -1,7 +1,57 @@
 
-<h2>Sign up</h2>
+<nav class="navbar navbar-expand-sm navbar-dark">
+    <a class="navbar-brand" href="/" style=""><h1><strong>Eat</strong><small>.bcn</small></h1></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-<form action="/signup" method="POST">
+    <div class="collapse navbar-collapse align-items-end " id="navbarColor02">
+      <ul class="navbar-nav mr-2">
+        <li class="nav-item active">
+          <a class="nav-link" href="/" style="">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item mr-2">
+          <a class="nav-link" href="restaurants" style="">All restaurants</a>
+        </li>
+        <li class="nav-item mr-2">
+          <a class="nav-link" href="login" style="">Login</a>
+        </li>
+        <li class="nav-item pt-2">
+          <a class="nav-link border border-white rounded p-1" href="signup" style="display:inline !important;">Signup</a>
+        </li>
+      </ul>
+
+    </div>
+  </nav>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb arr-right">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Sign up</li>
+  </ol>
+</nav>
+
+
+<div class="container" style="width:370px;">
+{{#if errorMessage}}
+  <div class="alert alert-danger alert-dismissible fade show">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    {{ errorMessage }}
+  </div>
+{{/if}}
+<form class="form-login" action="/signup" method="POST">
+  <h1 class="h3 mb-3 font-weight-normal">Sign up</h1>
+  <label for="inputName" class="sr-only mt-4">Email address</label>
+  <input name="name" type="text" id="inputEmail" name="name" class="form-control mt-2" placeholder="Name" required autofocus>
+  <label for="inputName" class="sr-only">Email address</label>
+  <input name="email" type="email" id="inputEmail" class="form-control mt-2" placeholder="Email address" required autofocus>
+  <label for="inputPassword" class="sr-only">Password</label>
+  <input name="password"  type="password" id="inputPassword" class="form-control mt-2" placeholder="Password" required>
+  <button class="btn btn-lg btn-primary btn-block mt-3" type="submit">Sign up</button>
+</form>
+
+
+
+{{!-- <form action="/signup" method="POST">
 
   <label for="name">Name:</label>
   <input type="text" name="name" placeholder="Your name">
@@ -20,9 +70,9 @@
 
   <button type="submit">Create new account</button>
 
-</form>
+</form> --}}
 
 {{!-- error message display --}}
-{{#if errorMessage}}
+{{!-- {{#if errorMessage}}
   <div class="error-message"> {{ errorMessage }}</div>
-{{/if}}
+{{/if}} --}}
