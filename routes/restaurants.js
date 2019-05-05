@@ -6,8 +6,9 @@ const feedPhoto = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400
 
 /* GET restaurants listing. */
 router.get('/', (req, res, next) => {
-  const { type } = req.query;
-  axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=${type}&location=41.387098,%202.165746&radius=5000&type=restaurant&keyword=cruise&key=${process.env.API_KEY}`)
+  const { type, price } = req.query;
+
+  axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?maxprice=${price}&minprice=${price}&keyword=${type}&location=41.387098,%202.165746&radius=5000&type=restaurant&key=${process.env.API_KEY}`)
     .then(function (response) {
       // console.log(response.data.results[0].photos[0].photo_reference);
       // const restaurants = response.data.results;
@@ -28,6 +29,7 @@ router.get('/', (req, res, next) => {
           user_ratings_total: response.data.results[i].user_ratings_total,
           next_page_token: response.data.next_page_token,
           type: type,
+          price: price,
           main_photo: `${feedPhoto}${response.data.results[i].photos[0].photo_reference}&key=${process.env.API_KEY}`
         });
       }
@@ -48,7 +50,7 @@ router.get('/', (req, res, next) => {
       //   // return axios.get(`${feedPhoto}${result.photos[0].photo_reference}&key=${process.env.API_KEY}`);
       // });
 
-      // console.log(newRestaurants);
+      console.log(newRestaurants);
       // return newRestaurants;
       res.render('restaurants/restaurant-list', { newRestaurants });
     })
