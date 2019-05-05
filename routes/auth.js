@@ -47,7 +47,6 @@ router.post('/login', (req, res, next) => {
       if (!user) {
         return res.render('auth/login', { errorMessage: 'The email doesn\'t exist.' });
       }
-      console.log('user', user);
 
       const passwordCorrect = bcrypt.compareSync(thePassword, user.password);
 
