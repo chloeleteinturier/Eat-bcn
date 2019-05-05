@@ -50,7 +50,7 @@ app.use(session({
 
 // Routes
 app.use('/', router);
-app.use('/private', privateRouter);
+app.use('/', privateRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

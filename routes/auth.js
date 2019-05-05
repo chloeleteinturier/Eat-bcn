@@ -53,7 +53,7 @@ router.post('/login', (req, res, next) => {
 
       if (passwordCorrect) {
         req.session.currentUser = user;
-        res.render('private/favorites');
+        res.redirect('/favorites');
       } else res.render('auth/login', { errorMessage: 'Incorrect password' });
     })
 
