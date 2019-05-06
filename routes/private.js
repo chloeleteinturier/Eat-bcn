@@ -5,12 +5,18 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 router.use((req, res, next) => {
-  console.log(req.session.currentUser);
+  console.log('req.session.currentUser', req.session.currentUser);
+
   if (req.session.currentUser) {
     next();
   } else {
     res.redirect('/login');
   }
+});
+
+// AVOID GET '/login' if already connected
+router.get('/login', (req, res, next) => {
+  res.render('private/favorites', { name: req.session.currentUser.name });
 });
 
 /* GET list of favorites. */
@@ -21,7 +27,6 @@ router.get('/favorites', (req, res, next) => {
 /* GET edit profile form . */
 router.get('/edit-profile', (req, res, next) => {
   const { _id } = req.session.currentUser;
-  console.log('get edit ******** req.session.currentUser._id', req.session.currentUser._id);
   User.findById(_id)
     .then((user) => res.render('private/edit-profile', { user }))
     .catch((err) => next(err));
@@ -34,7 +39,6 @@ router.post('/edit-profile', (req, res, next) => {
   const newEmail = req.body.email;
   const currentPassword = req.body.password;
   const newPassword = req.body.newPassword;
-  console.log('enter in post edit ******** req.session.currentUser._id', req.session.currentUser._id);
 
   // const currentUser = req.session.currentUser;
   if (newName === '' || newEmail === '' || currentPassword === '') {
@@ -49,12 +53,11 @@ router.post('/edit-profile', (req, res, next) => {
         return res.redirect('private/edit-profile');
       }
     })
-    .catch((err) => console.log(err));
+    .catch((err) => next(err));
 
   User.findById(_id)
     .then((user) => {
       const passwordCorrect = bcrypt.compareSync(currentPassword, req.session.currentUser.password);
-      console.log('************ enter in the check password ************');
 
       if (passwordCorrect) {
         if (newPassword !== '') {
@@ -67,8 +70,6 @@ router.post('/edit-profile', (req, res, next) => {
             })
             .catch((err) => next(err));
         }
-        console.log('*********** password is correct ***********');
-        console.log('req.session.currentUser', req.session.currentUser);
 
         if (newPassword === '') {
           User.findOneAndUpdate({ _id }, { $set: { name: newName, email: newEmail } }, { new: true })
@@ -78,9 +79,20 @@ router.post('/edit-profile', (req, res, next) => {
             })
             .catch((err) => next(err));
         }
-      } else console.log('hey');
+      } else res.redirect('/edit-profile');
     })
-    .catch((err) => console.log(err));
+    .catch((err) => next(err));
+});
+
+// GET 'logout'
+router.get('/logout', (req, res, next) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return next(err);
+    } else {
+      return res.redirect('/');
+    }
+  });
 });
 
 module.exports = router;

@@ -34,7 +34,12 @@ router.post('/signup', (req, res, next) => {
 });
 
 // GET '/login' page
-router.get('/login', (req, res, next) => res.render('auth/login'));
+router.get('/login', (req, res, next) => {
+  if (req.session.currentUser) {
+    res.redirect('/');
+  }
+  res.render('auth/login');
+});
 
 // POST '/login' page
 router.post('/login', (req, res, next) => {
