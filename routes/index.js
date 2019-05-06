@@ -10,6 +10,13 @@ router.use('/restaurants', restaurantsRouter);
 router.use('/', authRouter);
 
 /* GET home page. */
-router.get('/', (req, res, next) => res.render('index', { title: 'Express' }));
+router.get('/', (req, res, next) => {
+  if (req.session.currentUser) {
+    let currentUser = true;
+    res.render('index', { title: 'Express', currentUser });
+  } else {
+    res.render('index', { title: 'Express' });
+  }
+});
 
 module.exports = router;

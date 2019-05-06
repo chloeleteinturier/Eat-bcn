@@ -5,8 +5,6 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 router.use((req, res, next) => {
-  console.log('req.session.currentUser', req.session.currentUser);
-
   if (req.session.currentUser) {
     next();
   } else {
