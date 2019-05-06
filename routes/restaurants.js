@@ -1,6 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios'); // to use the API
+var envhandlebars = require('envhandlebars');
+
+// The Handlebars context is passed into this function
+// for registering helpers, partials or other extensions.
+function extendHandlebars (Handlebars) {
+  Handlebars.registerHelper('fullName', function (first, last) {
+    return last + ', ' + first;
+  });
+}
+
+envhandlebars({
+  extendHandlebars: extendHandlebars
+});
 
 // const feedPhoto = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=`;
 
@@ -31,7 +44,7 @@ router.get('/', (req, res, next) => {
       //     main_photo: `${feedPhoto}${response.data.results[i].photos[0].photo_reference}&key=${process.env.API_KEY}`
       //   });
       // }
-      console.log(price);
+      // console.log(price);
 
       newRestaurants.type = type;
       newRestaurants.price = price;
@@ -43,7 +56,7 @@ router.get('/', (req, res, next) => {
       }
 
       if (parseInt(price) === 1) {
-        console.log('in');
+        // console.log('in');
         newRestaurants.price1 = true;
         newRestaurants.price2 = false;
         newRestaurants.price3 = false;
@@ -65,7 +78,7 @@ router.get('/', (req, res, next) => {
         newRestaurants.price4 = true;
       }
 
-      console.log(newRestaurants.price1, newRestaurants.price2, newRestaurants.price3, newRestaurants.price4);
+      // console.log(newRestaurants.price1, newRestaurants.price2, newRestaurants.price3, newRestaurants.price4);
 
       for (var i = 0; i < newRestaurants.results.length; i++) {
         // console.log(restaurants[i].photos[0].photo_reference);
