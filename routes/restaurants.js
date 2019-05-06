@@ -1,19 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios'); // to use the API
-var envhandlebars = require('envhandlebars');
-
-// The Handlebars context is passed into this function
-// for registering helpers, partials or other extensions.
-function extendHandlebars (Handlebars) {
-  Handlebars.registerHelper('fullName', function (first, last) {
-    return last + ', ' + first;
-  });
-}
-
-envhandlebars({
-  extendHandlebars: extendHandlebars
-});
 
 // const feedPhoto = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=`;
 
