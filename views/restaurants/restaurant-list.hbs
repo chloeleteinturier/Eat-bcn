@@ -35,19 +35,19 @@
 <div class="container">
 
 <div class="btn-group mb-4 mt-2" role="group" aria-label="Basic example">
-  <a class="btn btn-outline-secondary" href="/restaurants?type={{newRestaurants.[0].type}}&price=1">$</a>
-  <a class="btn btn-outline-secondary" href="/restaurants?type={{newRestaurants.[0].type}}&price=2">$$</a>
-  <a class="btn btn-outline-secondary" href="/restaurants?type={{newRestaurants.[0].type}}&price=3">$$$</a>
-  <a class="btn btn-outline-secondary" href="/restaurants?type={{newRestaurants.[0].type}}&price=4">$$$$</a>
+  <a class="btn btn-outline-secondary" href="/restaurants?type={{newRestaurants.type}}&price=1">$</a>
+  <a class="btn btn-outline-secondary" href="/restaurants?type={{newRestaurants.type}}&price=2">$$</a>
+  <a class="btn btn-outline-secondary" href="/restaurants?type={{newRestaurants.type}}&price=3">$$$</a>
+  <a class="btn btn-outline-secondary" href="/restaurants?type={{newRestaurants.type}}&price=4">$$$$</a>
 </div>
 
-{{#each newRestaurants}}
+{{#each newRestaurants.results}}
 
 
   <div class="card mb-3" >
     <div class="row no-gutters">
       <div class="col-md-2" style="max-height: 100px; overflow:hidden;">
-        <a href="restaurants/details?place_id={{this.place_id}}" class="stretched-link"></a><img src="{{this.main_photo}}" class="card-img" alt="..."></a>
+        <a href="restaurants/details?place_id={{this.place_id}}" class="stretched-link"></a><img src=" https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={{this.photos.[0].photo_reference}}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw" class="card-img" alt="..."></a>
       </div>
       <div class="col-md-8">
         <div class="card-body">
@@ -62,11 +62,14 @@
 
   
 
-{{#if newRestaurants.[0].next_page_token}}
-<nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item"><a class="page-link"href="/restaurants?price={{newRestaurants.[0].price}}&type={{newRestaurants.[0].type}}&next_page_token={{newRestaurants.[0].next_page_token}}">Next</a></li>
+{{#if newRestaurants.next_page_token}}
+<nav aria-label="Page navigation example" >
+  <ul class="pagination d-flex  justify-content-end">
+    <li class="page-item mr-2"><a class="page-link"href="javascript:window.history.go(-1);">Previous</a></li>
+    <li class="page-item"><a class="page-link"href="/restaurants?price={{newRestaurants.price}}&type={{newRestaurants.type}}&pagetoken={{newRestaurants.next_page_token}}">Next</a></li>
+    
   </ul>
 </nav>
 {{/if}}
 </div>
+

@@ -9,6 +9,10 @@ a:hover {
   color: #6927ff;
 }
 
+.pagination a, .pagination a:hover{
+  color: #6927ff;
+}
+
 header{
   background:url(../src/background-home.jpg) rgba(0, 0, 0, 0.8)  no-repeat center ; 
   background-position-y: -330px;
