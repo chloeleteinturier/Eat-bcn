@@ -14,6 +14,40 @@
   </head>
   <body>
     
+    <nav class="navbar navbar-expand-sm navbar-dark">
+    <a class="navbar-brand" href="/" style=""><h1><strong>Eat</strong><small>.bcn</small></h1></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse align-items-end " id="navbarColor02">
+      <ul class="navbar-nav mr-2">
+        <li class="nav-item active">
+          <a class="nav-link" href="/" style="">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item mr-2">
+          <a class="nav-link" href="restaurants" style="">All restaurants</a>
+        </li>
+        {{#if currentUser}}
+        <li class="nav-item mr-2">
+          <a class="nav-link" href="favorites" style="">Favorites</a>
+        </li>
+        <li class="nav-item pt-2">
+          <a class="nav-link border border-white rounded p-1" href="logout" style="display:inline !important;">Logout</a>
+        </li>
+        {{else}}
+        <li class="nav-item mr-2">
+          <a class="nav-link" href="login" style="">Login</a>
+        </li>
+        <li class="nav-item pt-2">
+          <a class="nav-link border border-white rounded p-1" href="signup" style="display:inline !important;">Signup</a>
+        </li>
+        {{/if}}
+      </ul>
+
+    </div>
+  </nav>
+
     {{{body}}}
     
   </body>
