@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 const User = require('../models/user');
-
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
@@ -13,18 +12,21 @@ router.post('/signup', (req, res, next) => {
   const { name, email, password } = req.body;
 
   if (name === '' || email === '' || password === '') {
-    return res.render('auth/signup', { errorMessage: 'Please indicate your name, email and password' });
+    return res.redirect('/signup');
   }
 
   User.findOne({ email })
     .then((user) => {
-      if (user !== null) return res.render('auth/signup', { errorMessage: 'Email already used' });
+      if (user !== null) return res.redirect('/signup');
 
       const salt = bcrypt.genSaltSync(saltRounds);
       const hashedPassword = bcrypt.hashSync(password, salt);
 
       User.create({ name, email, password: hashedPassword })
-        .then(() => res.render('private/favorites'))
+        .then((user) => {
+          req.session.currentUser = user;
+          res.redirect('/favorites');
+        })
         .catch((err) => next(err));
     })
 
@@ -40,23 +42,21 @@ router.post('/login', (req, res, next) => {
   const theEmail = req.body.email;
 
   if (thePassword === '' || theEmail === '') {
-    return res.render('auth/login', { errorMessage: 'Please indicate your email and password' });
+    return res.redirect('/login');
   }
   User.findOne({ 'email': theEmail })
     .then((user) => {
       if (!user) {
-        return res.render('auth/login', { errorMessage: 'The email doesn\'t exist.' });
+        return res.redirect('/login');
       }
-      console.log('user', user);
 
       const passwordCorrect = bcrypt.compareSync(thePassword, user.password);
 
       if (passwordCorrect) {
         req.session.currentUser = user;
         res.redirect('/favorites');
-      } else res.render('auth/login', { errorMessage: 'Incorrect password' });
+      } else res.redirect('/login');
     })
-
     .catch((err) => next(err));
 });
 
