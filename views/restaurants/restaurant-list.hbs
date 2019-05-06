@@ -35,10 +35,10 @@
 <div class="container">
 
 <div class="btn-group mb-4 mt-2" role="group" aria-label="Basic example">
-  <a class="btn btn-outline-secondary" href="/restaurants?type={{newRestaurants.type}}&price=1">$</a>
-  <a class="btn btn-outline-secondary" href="/restaurants?type={{newRestaurants.type}}&price=2">$$</a>
-  <a class="btn btn-outline-secondary" href="/restaurants?type={{newRestaurants.type}}&price=3">$$$</a>
-  <a class="btn btn-outline-secondary" href="/restaurants?type={{newRestaurants.type}}&price=4">$$$$</a>
+  <a class="btn{{#if newRestaurants.price1}} btn-secondary{{else}} btn-outline-secondary{{/if}}" href="/restaurants?page={{newRestaurants.page}}&type={{newRestaurants.type}}&price=1">$</a>
+  <a class="btn{{#if newRestaurants.price2}} btn-secondary{{else}} btn-outline-secondary{{/if}}" href="/restaurants?page={{newRestaurants.page}}&type={{newRestaurants.type}}&price=2">$$</a>
+  <a class="btn{{#if newRestaurants.price3}} btn-secondary{{else}} btn-outline-secondary{{/if}}" href="/restaurants?page={{newRestaurants.page}}&type={{newRestaurants.type}}&price=3">$$$</a>
+  <a class="btn{{#if newRestaurants.price4}} btn-secondary{{else}} btn-outline-secondary{{/if}}" href="/restaurants?page={{newRestaurants.page}}&type={{newRestaurants.type}}&price=4">$$$$</a>
 </div>
 
 {{#each newRestaurants.results}}
@@ -65,8 +65,10 @@
 {{#if newRestaurants.next_page_token}}
 <nav aria-label="Page navigation example" >
   <ul class="pagination d-flex  justify-content-end">
+    {{#if newRestaurants.notfistPage}}
     <li class="page-item mr-2"><a class="page-link"href="javascript:window.history.go(-1);">Previous</a></li>
-    <li class="page-item"><a class="page-link"href="/restaurants?price={{newRestaurants.price}}&type={{newRestaurants.type}}&pagetoken={{newRestaurants.next_page_token}}">Next</a></li>
+    {{/if}}
+    <li class="page-item"><a class="page-link"href="/restaurants?page={{newRestaurants.page}}&price={{newRestaurants.price}}&type={{newRestaurants.type}}&pagetoken={{newRestaurants.next_page_token}}">Next</a></li>
     
   </ul>
 </nav>

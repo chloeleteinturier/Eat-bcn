@@ -6,14 +6,14 @@ const axios = require('axios'); // to use the API
 
 /* GET restaurants listing. */
 router.get('/', (req, res, next) => {
-  const { type, price, pagetoken } = req.query;
+  const { type, price, pagetoken, page } = req.query;
 
   let pagetokenParam = '';
   if (pagetoken !== undefined) {
     pagetokenParam = 'pagetoken=' + pagetoken + '&';
   }
 
-  axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?${pagetokenParam}maxprice=${price}&minprice=${price}&keyword=${type}&location=41.387098,%202.165746&radius=5000&type=restaurant&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw`)
+  axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?page=${page}&${pagetokenParam}maxprice=${price}&minprice=${price}&keyword=${type}&location=41.387098,%202.165746&radius=5000&type=restaurant&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw`)
     .then(function (response) {
       const newRestaurants = response.data;
 
@@ -31,14 +31,45 @@ router.get('/', (req, res, next) => {
       //     main_photo: `${feedPhoto}${response.data.results[i].photos[0].photo_reference}&key=${process.env.API_KEY}`
       //   });
       // }
+      console.log(price);
 
       newRestaurants.type = type;
       newRestaurants.price = price;
-      // newRestaurants.numPage = numPage;
+      newRestaurants.page = 0;
+      newRestaurants.page = parseInt(page) + 1;
+      newRestaurants.notfistPage = true;
+      if (newRestaurants.page === 1) {
+        newRestaurants.notfistPage = false;
+      }
+
+      if (parseInt(price) === 1) {
+        console.log('in');
+        newRestaurants.price1 = true;
+        newRestaurants.price2 = false;
+        newRestaurants.price3 = false;
+        newRestaurants.price4 = false;
+      } else if (parseInt(price) === 2) {
+        newRestaurants.price1 = false;
+        newRestaurants.price2 = true;
+        newRestaurants.price3 = false;
+        newRestaurants.price4 = false;
+      } else if (parseInt(price) === 3) {
+        newRestaurants.price1 = false;
+        newRestaurants.price2 = false;
+        newRestaurants.price3 = true;
+        newRestaurants.price4 = false;
+      } else if (parseInt(price) === 4) {
+        newRestaurants.price1 = false;
+        newRestaurants.price2 = false;
+        newRestaurants.price3 = false;
+        newRestaurants.price4 = true;
+      }
+
+      console.log(newRestaurants.price1, newRestaurants.price2, newRestaurants.price3, newRestaurants.price4);
 
       for (var i = 0; i < newRestaurants.results.length; i++) {
         // console.log(restaurants[i].photos[0].photo_reference);
-        console.log(newRestaurants.results[i].photos[0].photo_reference);
+        // console.log(newRestaurants.results[i].photos[0].photo_reference);
       }
 
       res.render('restaurants/restaurant-list', { newRestaurants });
