@@ -12,11 +12,6 @@ router.use((req, res, next) => {
   }
 });
 
-// AVOID GET '/login' if already connected
-router.get('/login', (req, res, next) => {
-  res.render('private/favorites', { name: req.session.currentUser.name });
-});
-
 /* GET list of favorites. */
 router.get('/favorites', (req, res, next) => {
   res.render('private/favorites', { name: req.session.currentUser.name });
@@ -48,7 +43,8 @@ router.post('/edit-profile', (req, res, next) => {
   User.findOne({ 'email': newEmail })
     .then((user) => {
       if (user.email !== req.session.currentUser.email && user.email !== null) {
-        return res.redirect('private/edit-profile');
+        return res.redirect('/edit-profile');
+        // return res.render('private/edit-profile', { errorMessage: 'Email already exists' });
       }
     })
     .catch((err) => next(err));

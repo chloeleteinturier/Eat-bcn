@@ -22,7 +22,7 @@ router.get('/', (req, res, next) => {
     let currentUser = true;
     res.render('index', { title: 'Express', currentUser, name: req.session.currentUser.name });
   } else {
-    res.render('index', { title: 'Express' });
+    res.render('index', { title: 'Eat.bcn' });
   }
 });
 

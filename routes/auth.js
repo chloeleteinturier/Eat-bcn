@@ -17,7 +17,9 @@ router.post('/signup', (req, res, next) => {
 
   User.findOne({ email })
     .then((user) => {
-      if (user !== null) return res.redirect('/signup');
+      if (user !== null) {
+        return res.redirect('/signup');
+      }
 
       const salt = bcrypt.genSaltSync(saltRounds);
       const hashedPassword = bcrypt.hashSync(password, salt);
