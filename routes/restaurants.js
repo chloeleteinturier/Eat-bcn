@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios'); // to use the API
+const User = require('../models/user');
+const Favorite = require('../models/favorites');
 
 // const feedPhoto = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=`;
 
@@ -86,6 +88,8 @@ router.get('/details', (req, res, next) => {
   axios.get(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${place_id}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw`)
     .then(function (response) {
       const restaurantDetails = response.data.result;
+      const userId = req.session.currentUser._id;
+      // Favorite.findById(place_id);
       // console.log(restaurantDetails);
       res.render('restaurants/restaurant-details', { restaurantDetails });
     })
