@@ -5,32 +5,19 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 // GET '/signup' page
-router.get('/signup', (req, res, next) => {
-  if (req.session.currentUser) {
-    res.redirect('/');
-  } else {
-    const data = {
-      messages: req.flash('message-name')
-    };
-    res.render('auth/signup', data);
-  }
-});
+router.get('/signup', (req, res, next) => res.render('auth/signup'));
 
 // POST '/signup' page
 router.post('/signup', (req, res, next) => {
   const { name, email, password } = req.body;
 
   if (name === '' || email === '' || password === '') {
-    req.flash('message-name', 'Please, enter your name, email and password');
     return res.redirect('/signup');
   }
 
   User.findOne({ email })
     .then((user) => {
-      if (user !== null) {
-        req.flash('message-name', 'Email already taken');
-        return res.redirect('/signup');
-      }
+      if (user !== null) return res.redirect('/signup');
 
       const salt = bcrypt.genSaltSync(saltRounds);
       const hashedPassword = bcrypt.hashSync(password, salt);
@@ -50,12 +37,8 @@ router.post('/signup', (req, res, next) => {
 router.get('/login', (req, res, next) => {
   if (req.session.currentUser) {
     res.redirect('/');
-  } else {
-    const data = {
-      messages: req.flash('message-name')
-    };
-    res.render('auth/login', data);
   }
+  res.render('auth/login');
 });
 
 // POST '/login' page
@@ -64,13 +47,11 @@ router.post('/login', (req, res, next) => {
   const theEmail = req.body.email;
 
   if (thePassword === '' || theEmail === '') {
-    req.flash('message-name', 'Please, enter your email and password');
     return res.redirect('/login');
   }
   User.findOne({ 'email': theEmail })
     .then((user) => {
       if (!user) {
-        req.flash('message-name', 'The email doesn\'t exist');
         return res.redirect('/login');
       }
 
@@ -79,10 +60,7 @@ router.post('/login', (req, res, next) => {
       if (passwordCorrect) {
         req.session.currentUser = user;
         res.redirect('/favorites');
-      } else {
-        req.flash('message-name', 'Password incorrect');
-        res.redirect('/login');
-      }
+      } else res.redirect('/login');
     })
     .catch((err) => next(err));
 });

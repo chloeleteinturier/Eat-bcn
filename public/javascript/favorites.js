@@ -16,9 +16,12 @@ let favoriteFormHtml = `
 `;
 
 
-favoriteContainer.addEventListener("click", (e) => {
-  e.preventDefault();
+favoriteContainer.addEventListener("click", () => {
+  
   if (favoriteStatus === "off"){
+    
+   
+    
     hiddenForm.submit();
     favoriteContainer.innerHTML= '<a id="favorite" class="btn btn-secondary ml-1"><img src="/src/favorite-on.svg"></a>';
     favoriteStatus = "on";
