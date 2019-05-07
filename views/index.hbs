@@ -2,7 +2,12 @@
 
 <header>
  <div class="layer d-flex flex-column  align-items-center justify-content-center" style="height: 100%">
+    {{#if currentUser}}
+    <h2>Hi {{this.name}}</h2>
+    {{else}}
     <h2>The best restaurants of Barcelona</h2>
+    {{/if}}
+    
     <form action="/restaurants"  method="get" class="form-inline pt-4">
         <div class="form-row align-items-center">
           {{!-- <div class="col-auto">
