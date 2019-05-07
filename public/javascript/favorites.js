@@ -19,16 +19,12 @@ let favoriteFormHtml = `
 favoriteContainer.addEventListener("click", (e) => {
   e.preventDefault();
   if (favoriteStatus === "off"){
-    
-   
-    favoriteContainer.innerHTML= '<a id="favorite" class="btn btn-secondary ml-1"><img src="/src/favorite-on.svg"></a>';
-    
     hiddenForm.submit();
+    favoriteContainer.innerHTML= '<a id="favorite" class="btn btn-secondary ml-1"><img src="/src/favorite-on.svg"></a>';
     favoriteStatus = "on";
   }else{
-    
-    favoriteContainer.innerHTML= '<a id="favorite" class="btn btn-secondary ml-1"><img src="/src/favorite-off.svg"></a>';
     hiddenForm.submit();
+    favoriteContainer.innerHTML= '<a id="favorite" class="btn btn-secondary ml-1"><img src="/src/favorite-off.svg"></a>';
     favoriteStatus = "off";
   }
 });

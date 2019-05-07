@@ -2,9 +2,22 @@ const express = require('express');
 const router = express.Router();
 const Favorite = require('../models/favorites');
 
+ 
+router.use((req,res, next) => {
+  if(req.session.currentUser){
+    console.log("connected")
+    next();
+  }else{
+    console.log("no connected")
+    res.redirect('/login');
+  }
+})
+
+
 router.post('/', (req, res, next) => {
   const { placeId, status } = req.body;
 
+  console.log(req.session.currentUser);
 
   if(status === "off"){
     Favorite.create({ place_id: placeId })
@@ -19,29 +32,5 @@ router.post('/', (req, res, next) => {
 
 
 
-router.post('/signup', (req, res, next) => {
-  const { name, email, password } = req.body;
-
-  if (name === '' || email === '' || password === '') {
-    return res.redirect('/signup');
-  }
-
-  User.findOne({ email })
-    .then((user) => {
-      if (user !== null) return res.redirect('/signup');
-
-      const salt = bcrypt.genSaltSync(saltRounds);
-      const hashedPassword = bcrypt.hashSync(password, salt);
-
-      User.create({ name, email, password: hashedPassword })
-        .then((user) => {
-          req.session.currentUser = user;
-          res.redirect('/favorites');
-        })
-        .catch((err) => next(err));
-    })
-
-    .catch((err) => next(err));
-});
 
 module.exports = router;
