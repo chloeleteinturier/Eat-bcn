@@ -13,9 +13,9 @@ router.use('/', authRouter);
 router.get('/', (req, res, next) => {
   if (req.session.currentUser) {
     let currentUser = true;
-    res.render('index', { title: 'Express', currentUser });
+    res.render('index', { title: `Eat.bcn - ${req.session.currentUser.name} `, currentUser });
   } else {
-    res.render('index', { title: 'Express' });
+    res.render('index', { title: 'Eat.bcn' });
   }
 });
 
