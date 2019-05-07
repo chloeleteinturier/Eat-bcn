@@ -10,10 +10,10 @@
 <div class="container">
 
 <div class="btn-group mb-4 mt-2" role="group" aria-label="Basic example">
-  <a class="btn{{#if newRestaurants.price1}} btn-secondary{{else}} btn-outline-secondary{{/if}}" href="/restaurants?page={{newRestaurants.page}}&type={{newRestaurants.type}}&price=1">$</a>
-  <a class="btn{{#if newRestaurants.price2}} btn-secondary{{else}} btn-outline-secondary{{/if}}" href="/restaurants?page={{newRestaurants.page}}&type={{newRestaurants.type}}&price=2">$$</a>
-  <a class="btn{{#if newRestaurants.price3}} btn-secondary{{else}} btn-outline-secondary{{/if}}" href="/restaurants?page={{newRestaurants.page}}&type={{newRestaurants.type}}&price=3">$$$</a>
-  <a class="btn{{#if newRestaurants.price4}} btn-secondary{{else}} btn-outline-secondary{{/if}}" href="/restaurants?page={{newRestaurants.page}}&type={{newRestaurants.type}}&price=4">$$$$</a>
+  <a class="btn{{#if newRestaurants.price1}} btn-secondary{{else}} btn-outline-secondary{{/if}}" href="/restaurants?page=0&type={{newRestaurants.type}}&price=1">$</a>
+  <a class="btn{{#if newRestaurants.price2}} btn-secondary{{else}} btn-outline-secondary{{/if}}" href="/restaurants?page=0&type={{newRestaurants.type}}&price=2">$$</a>
+  <a class="btn{{#if newRestaurants.price3}} btn-secondary{{else}} btn-outline-secondary{{/if}}" href="/restaurants?page=0&type={{newRestaurants.type}}&price=3">$$$</a>
+  <a class="btn{{#if newRestaurants.price4}} btn-secondary{{else}} btn-outline-secondary{{/if}}" href="/restaurants?page=0&type={{newRestaurants.type}}&price=4">$$$$</a>
 </div>
 
 {{#each newRestaurants.results}}
@@ -21,8 +21,10 @@
 
   <div class="card mb-3" >
     <div class="row no-gutters">
-      <div class="col-md-2" style="max-height: 100px; overflow:hidden;">
-        <a href="restaurants/details?place_id={{this.place_id}}" class="stretched-link"></a><img src=" https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={{this.photos.[0].photo_reference}}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw" class="card-img" alt="..."></a>
+      <div class="col-md-2 my-card">
+        <a href="restaurants/details?place_id={{this.place_id}}" class="stretched-link"></a>
+          <img src=" https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={{this.photos.[0].photo_reference}}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw" class="card-img" alt="...">
+        </a>
       </div>
       <div class="col-md-8">
         <div class="card-body">
@@ -38,7 +40,7 @@
   
 
 {{#if newRestaurants.next_page_token}}
-<nav aria-label="Page navigation example" >
+<nav aria-label="Page navigation example pb-6" >
   <ul class="pagination d-flex  justify-content-end">
     {{#if newRestaurants.notfistPage}}
     <li class="page-item mr-2"><a class="page-link"href="javascript:window.history.go(-1);">Previous</a></li>
