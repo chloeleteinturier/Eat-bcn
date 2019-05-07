@@ -7,7 +7,7 @@
 </nav>
 
 
-<div class="container">
+<div class="container" id="restaurant-list">
 
 <div class="btn-group mb-4 mt-2" role="group" aria-label="Basic example">
   <a class="btn{{#if newRestaurants.price1}} btn-secondary{{else}} btn-outline-secondary{{/if}}" href="/restaurants?page=0&type={{newRestaurants.type}}&price=1">$</a>
@@ -19,7 +19,7 @@
 {{#each newRestaurants.results}}
 
 
-  <div class="card mb-3" >
+  <div class="card mb-3">
     <div class="row no-gutters">
       <div class="col-md-2 my-card">
         <a href="restaurants/details?place_id={{this.place_id}}" class="stretched-link"></a>
@@ -34,6 +34,8 @@
       </div>
     </div>
   </div>
+
+  
 {{/each}}
 
 

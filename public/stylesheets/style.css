@@ -231,3 +231,26 @@ header h2{
  footer{
    margin-top:50px;
  }
+
+
+
+
+
+ .lb-image, .lb-dataContainer {
+  max-width: 100%;
+  height: auto !important;
+  width: 100%;
+ }
+ 
+ .lb-outerContainer {
+  max-width: 100%;
+  height: auto !important;
+ }
+ .imagen-galleria{
+   height: 70px;
+   width: 85px;
+   overflow: hidden;
+   padding-top:7px;
+   margin-right:7px;
+
+ }

@@ -88,7 +88,7 @@ router.get('/details', (req, res, next) => {
   axios.get(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${place_id}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw`)
     .then(function (response) {
       const restaurantDetails = response.data.result;
-      const userId = req.session.currentUser._id;
+      // const userId = req.session.currentUser._id;
       // Favorite.findById(place_id);
       // console.log(restaurantDetails);
       res.render('restaurants/restaurant-details', { restaurantDetails });
