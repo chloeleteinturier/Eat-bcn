@@ -5,7 +5,12 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 // GET '/signup' page
-router.get('/signup', (req, res, next) => res.render('auth/signup'));
+router.get('/signup', (req, res, next) => {
+  const data = {
+    messages: req.flash('message-name')
+  };
+  res.render('auth/signup', data);
+});
 
 // POST '/signup' page
 router.post('/signup', (req, res, next) => {
@@ -18,6 +23,7 @@ router.post('/signup', (req, res, next) => {
   User.findOne({ email })
     .then((user) => {
       if (user !== null) {
+        req.flash('message-name', 'Email already taken');
         return res.redirect('/signup');
       }
 
