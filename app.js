@@ -5,6 +5,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
+const flash = require('connect-flash');
 
 // Modules used for sessions
 const session = require('express-session');
@@ -53,6 +54,8 @@ app.use((req, res, next) => {
   app.locals.currentUser = req.session.currentUser;
   next();
 });
+
+app.use(flash());
 
 // Routes
 app.use('/', router);

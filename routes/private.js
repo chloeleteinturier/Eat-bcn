@@ -21,7 +21,13 @@ router.get('/favorites', (req, res, next) => {
 router.get('/edit-profile', (req, res, next) => {
   const { _id } = req.session.currentUser;
   User.findById(_id)
-    .then((user) => res.render('private/edit-profile', { user }))
+    .then((user) => {
+      const data = {
+        user: user,
+        messages: req.flash('message-name')
+      };
+      res.render('private/edit-profile', data);
+    })
     .catch((err) => next(err));
 });
 
@@ -36,15 +42,18 @@ router.post('/edit-profile', (req, res, next) => {
   // const currentUser = req.session.currentUser;
   if (newName === '' || newEmail === '' || currentPassword === '') {
     User.findById(_id)
-      .then((user) => res.redirect('/edit-profile'))
+      .then((user) => {
+        req.flash('message-name', 'Please, enter your name, email and password');
+        res.redirect('/edit-profile');
+      })
       .catch((err) => next(err));
   }
 
   User.findOne({ 'email': newEmail })
     .then((user) => {
       if (user.email !== req.session.currentUser.email && user.email !== null) {
+        req.flash('message-name', 'Email already taken');
         return res.redirect('/edit-profile');
-        // return res.render('private/edit-profile', { errorMessage: 'Email already exists' });
       }
     })
     .catch((err) => next(err));
@@ -73,7 +82,10 @@ router.post('/edit-profile', (req, res, next) => {
             })
             .catch((err) => next(err));
         }
-      } else res.redirect('/edit-profile');
+      } else {
+        req.flash('message-name', 'Password incorrect');
+        res.redirect('/edit-profile');
+      }
     })
     .catch((err) => next(err));
 });

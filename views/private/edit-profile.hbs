@@ -8,12 +8,16 @@
 
 
 <div class="container" style="width:370px;">
-{{#if errorMessage}}
-  <div class="alert alert-danger alert-dismissible fade show">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    {{ errorMessage }}
-  </div>
+  
+{{#if messages.length}}
+    {{#each messages}}
+      <div class="alert alert-danger alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{this}}
+      </div>
+    {{/each}}
 {{/if}}
+
 <form class="form-login"action="/edit-profile?_id={{user._id}}" method="POST">
   <h1 class="h3 mb-3 font-weight-normal">Edit your profile</h1>
   <label for="name" class="sr-only mt-4">Name</label>
