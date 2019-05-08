@@ -254,11 +254,11 @@ header h2{
   max-width: 100%;
   height: auto !important;
  }
- .imagen-galleria{
-   height: 70px;
-   width: 85px;
+ .image-gallery{
+   height: 60px;
+   width: 75px;
    overflow: hidden;
-   padding-top:7px;
-   margin-right:7px;
+   padding-top:10px;
+   margin-right:10px;
 
  }

@@ -11,10 +11,10 @@
 
   <div class="row">
     <div class="pr-4 pl-4 pb-4">
-        <img style="width:370px;"  src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=370&photoreference={{restaurantDetails.photos.[0].photo_reference}}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw">
-        <div class="d-flex flex-row flex-wrap" style="width:370px;">
+        <img style="width:340px;"  src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=340&photoreference={{restaurantDetails.photos.[0].photo_reference}}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw">
+        <div class="d-flex flex-row flex-wrap" style="width:340px;">
         {{#each restaurantDetails.photos}}
-        <div class="imagen-galleria">
+        <div class="image-gallery">
           <a href="https://maps.googleapis.com/maps/api/place/photo?maxwidth=1000&photoreference={{this.photo_reference}}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw" data-lightbox="example-1">
             <img style="padding-right:10px; padding-bottom:10px;" src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=100&photoreference={{this.photo_reference}}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw">
           </a>
