@@ -68,14 +68,14 @@ router.get('/details', (req, res, next) => {
       User.find({ _id: userId }, { favorites: 1, _id: 0 })
       // .then((user) => {
       //   Promise.all(user[0].favorites.map((element) => {
-      //     return User.find({ _id: userId }, { favorites: element });
+      //     return Favorite.find({ _id: element, place_id });
       //   }))
 
         .then((user) => {
           if (user) {
             console.log('user[0].favorites', user[0].favorites);
             console.log('user[0].favorites.length', user[0].favorites.length);
-            // console.log('user', user);
+            console.log('user', user);
 
             favoriteStatus = 'on';
           } else {
