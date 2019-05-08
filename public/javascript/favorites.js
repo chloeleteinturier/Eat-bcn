@@ -1,10 +1,9 @@
 'use strict';
 
 let favoriteContainer = document.getElementById('favoriteContainer');
-let user = document.getElementById('user').className;
 
 let favoriteStatus = favoriteContainer.className;
-let favoritePhoto = `<a id="favorite" class="btn btn-secondary ml-1"><img src="/src/favorite-${favoriteStatus}.svg"></a>`;
+let favoritePhoto = `<button id="favorite" class="btn btn-secondary ml-1"><img src="/src/favorite-${favoriteStatus}.svg"></button>`;
 
 let placeId = window.location.search.slice(10);
 
@@ -15,20 +14,12 @@ favoriteContainer.addEventListener('click', (e) => {
     placeId,
     status: favoriteStatus
   });
-  console.log('user', user);
-
-  if (user) {
-    if (favoriteStatus === 'off') {
-      favoriteContainer.innerHTML = '<a id="favorite" class="btn btn-secondary ml-1"><img src="/src/favorite-on.svg"></a>';
-      favoriteStatus = 'on';
-    } else {
-      favoriteContainer.innerHTML = '<a id="favorite" class="btn btn-secondary ml-1"><img src="/src/favorite-off.svg"></a>';
-      favoriteStatus = 'off';
-    }
+  if (favoriteStatus === 'off') {
+    favoriteContainer.innerHTML = '<button id="favorite" class="btn btn-secondary ml-1"><img src="/src/favorite-on.svg"></button>';
+    favoriteStatus = 'on';
   } else {
-    console.log('no user');
-
-    window.location.href = '/login';
+    favoriteContainer.innerHTML = '<button id="favorite" class="btn btn-secondary ml-1"><img src="/src/favorite-off.svg"></button>';
+    favoriteStatus = 'off';
   }
 });
 
