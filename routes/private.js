@@ -23,10 +23,7 @@ router.get('/favorites', (req, res, next) => {
     .then((user) => {
       let userFavorites = user.favorites;
 
-      console.log('User favorites: ', userFavorites);
-
       if (userFavorites.length > 0) {
-        console.log('Number of favorites', userFavorites.length);
         let placeIdArr = [];
         let favArr = [];
 
@@ -35,44 +32,26 @@ router.get('/favorites', (req, res, next) => {
             .then((favorites) => {
               placeIdArr.push(favorites[0].place_id);
             })
-            .catch((err) => console.log(err));
+            .catch((err) => next(err));
         }))
           .then(() => {
             // second promise to access axios
             Promise.all(placeIdArr.map((element) => {
-              // console.log(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${element}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw`);
               return axios.get(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${element}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw`)
                 .then((favorites) => {
-                  // console.log(favorites.data);
                   favArr.push(favorites.data.result);
                 })
-                .catch((err) => console.log(err));
+                .catch((err) => next(err));
             }))
               .then(() => {
-                // console.log(favArr);
                 res.render('private/favorites', { favorites: favArr });
               })
-              .catch((err) => console.log(err));
+              .catch((err) => next(err));
           })
-          .catch((err) => console.log(err));
+          .catch((err) => next(err));
       } else {
-        console.log('No favorites yet');
+        res.render('private/favorites');
       }
-      // if (userFavorites.length > 0) {
-      //   Favorites.findById({ _id: userFavorites })
-      //     .then((favoriteIds) => {
-      //       console.log(favoriteIds);
-      //       // axios.get(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${favoriteIds.place_id}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw`)
-      //       //   .then((favorites) => {
-      //       //     console.log(favorites.data.length);
-      //       //     res.render('private/favorites', { favorites });
-      //       //   })
-      //       //   .catch((err) => console.log(err));
-      //     })
-      //     .catch((err) => console.log(err));
-      // } else {
-      //   res.render('private/favorites');
-      // }
     })
     .catch((err) => next(err));
 });
@@ -99,7 +78,6 @@ router.post('/edit-profile', (req, res, next) => {
   const currentPassword = req.body.password;
   const newPassword = req.body.newPassword;
 
-  // const currentUser = req.session.currentUser;
   if (newName === '' || newEmail === '' || currentPassword === '') {
     User.findById(_id)
       .then((user) => {
