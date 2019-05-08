@@ -10,7 +10,7 @@ let placeId = window.location.search.slice(10);
 favoriteContainer.addEventListener('click', (e) => {
   e.preventDefault();
 
-  axios.post('http://localhost:3000/api', {
+  axios.post('/api', {
     placeId,
     status: favoriteStatus
   });
