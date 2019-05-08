@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
+const axios = require('axios'); // to use the API
+
 const User = require('../models/user');
+const Favorites = require('../models/favorites');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
@@ -14,7 +17,64 @@ router.use((req, res, next) => {
 
 /* GET list of favorites. */
 router.get('/favorites', (req, res, next) => {
-  res.render('private/favorites', { name: req.session.currentUser.name });
+  const { _id } = req.session.currentUser;
+
+  User.findById(_id)
+    .then((user) => {
+      let userFavorites = user.favorites;
+
+      console.log('User favorites: ', userFavorites);
+
+      if (userFavorites.length > 0) {
+        console.log('Number of favorites', userFavorites.length);
+        let placeIdArr = [];
+        let favArr = [];
+
+        Promise.all(userFavorites.map((element) => {
+          return Favorites.find({ _id: element })
+            .then((favorites) => {
+              placeIdArr.push(favorites[0].place_id);
+            })
+            .catch((err) => console.log(err));
+        }))
+          .then(() => {
+            // second promise to access axios
+            Promise.all(placeIdArr.map((element) => {
+              // console.log(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${element}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw`);
+              return axios.get(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${element}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw`)
+                .then((favorites) => {
+                  // console.log(favorites.data);
+                  favArr.push(favorites.data.result);
+                })
+                .catch((err) => console.log(err));
+            }))
+              .then(() => {
+                // console.log(favArr);
+                res.render('private/favorites', { favorites: favArr });
+              })
+              .catch((err) => console.log(err));
+          })
+          .catch((err) => console.log(err));
+      } else {
+        console.log('No favorites yet');
+      }
+      // if (userFavorites.length > 0) {
+      //   Favorites.findById({ _id: userFavorites })
+      //     .then((favoriteIds) => {
+      //       console.log(favoriteIds);
+      //       // axios.get(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${favoriteIds.place_id}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw`)
+      //       //   .then((favorites) => {
+      //       //     console.log(favorites.data.length);
+      //       //     res.render('private/favorites', { favorites });
+      //       //   })
+      //       //   .catch((err) => console.log(err));
+      //     })
+      //     .catch((err) => console.log(err));
+      // } else {
+      //   res.render('private/favorites');
+      // }
+    })
+    .catch((err) => next(err));
 });
 
 /* GET edit profile form . */
