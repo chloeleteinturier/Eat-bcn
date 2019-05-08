@@ -22,6 +22,7 @@ header{
 header h2{
   font-size:2.8rem;
   text-shadow: rgba(0,0,0,0.9) 0 1px 0;
+  text-align: center !important;
 }
 
 .layer {
@@ -47,7 +48,6 @@ header h2{
   .navbar-expand-sm .navbar-collapse {
       justify-content: flex-end !important;
   }
-
 }
 
 .navbar-toggler{
@@ -101,6 +101,13 @@ header h2{
 .card a:hover{
   background-color:#eee;
 }
+
+.card:hover{
+  background-color:#eee;
+}
+
+
+
 
 .price1:after{
   content: "$";
@@ -177,3 +184,73 @@ header h2{
   top: 80px;
 }
 
+
+
+@media (min-width: 400px) { 
+  .my-card{  
+  max-height: 200px;
+  overflow: hidden; 
+  }
+  .card-img{
+    position: relative;
+    top: -25%;
+  }
+}
+
+
+
+
+
+@media (min-width: 768px) { 
+  .my-card{  
+    max-height: 200px;
+    overflow: hidden; 
+    }
+    .card-img{
+      position: relative;
+      top: 0;
+    }  
+ }
+
+
+@media (min-width: 992px) { 
+  .my-card{  
+    max-height: 200px;
+    overflow: hidden; 
+    }
+ }
+
+
+@media (min-width: 1200px) { 
+  .my-card{  
+    max-height: 100px;
+    overflow: hidden; 
+    }
+ }
+
+ footer{
+   margin-top:50px;
+ }
+
+
+
+
+
+ .lb-image, .lb-dataContainer {
+  max-width: 100%;
+  height: auto !important;
+  width: 100%;
+ }
+ 
+ .lb-outerContainer {
+  max-width: 100%;
+  height: auto !important;
+ }
+ .imagen-galleria{
+   height: 70px;
+   width: 85px;
+   overflow: hidden;
+   padding-top:7px;
+   margin-right:7px;
+
+ }

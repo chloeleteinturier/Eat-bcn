@@ -17,12 +17,58 @@
             <select class="form-control-lg " id="exampleFormControlSelect1" name="type">
               <option>What do you want to eat?</option>
               <option value="italian">Italian</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
+              <option value="africano">Africano</option>
+              <option value="aleman">Alemán</option>
+              <option value="americano">Americano</option>
+              <option value="andaluz">Andaluz</option>
+               <option value="arabe">Árabe</option>             
+               <option value="arroceria">Arrocería</option>                       
+               <option value="asiatico">Asiático</option>             
+               <option value="asturiano">Asturiano</option>             
+               <option value="belga">Belga</option>             
+               <option value="brasileno">Brasileño</option>             
+               <option value="castellano">Castellano</option>             
+               <option value="catalan">Catalán</option>             
+               <option value="chino">Chino</option>             
+               <option value="mercado">De mercado</option>             
+               <option value="colombiano">Colombiano</option>             
+               <option value="coreano">Coreano</option>             
+               <option value="creativo">Creativo</option>             
+               <option value="creperia">Crepería</option>             
+               <option value="cubano">Cubano</option>             
+               <option value="fusion">De Fusión</option>             
+               <option value="egipcio">Egipcio</option>             
+               <option value="espanol">Español</option>             
+               <option value="frances">Francés</option>             
+               <option value="gallego">Gallego</option> 
+               <option value="griego">Griego</option> 
+               <option value="indio">Indio</option> 
+               <option value="ingles">Inglés</option> 
+               <option value="internacional">Internacional</option> 
+               <option value="irani">Iraní</option> 
+               <option value="Italiano">Italiano</option> 
+               <option value="japones">Japonés</option> 
+               <option value="latino">Latino</option> 
+               <option value="libanes">Libanés</option> 
+               <option value="marisqueria">Marisquería</option> 
+               <option value="marroqui">Marroquí</option> 
+               <option value="mediterraneo">Mediterráneo</option> 
+               <option value="mexicano">Mexicano</option> 
+               <option value="navarro">Navarro</option> 
+               <option value="peruano">Peruano</option> 
+               <option value="portugues">Portugués</option> 
+               <option value="Ruso">Ruso</option> 
+               <option value="suizo">Suizo</option> 
+               <option value="tailandes">Tailandés</option> 
+               <option value="turco">Turco</option> 
+               <option value="valenciano">Valenciano</option> 
+               <option value="vasco">Vasco</option> 
+               <option value="vegetariano">Vegetariano</option> 
+               <option value="vietnamita">Vietnamita</option>                         
             </select>
           </div>
           <div class="col-auto">
+            <input type="hidden" value="0" name="page">
             <button type="submit" class="btn btn-primary  btn-lg my-2 my-sm-0">Search</button>
           </div>
         </div>
@@ -31,16 +77,8 @@
 </header>
 
 
-<br>
-<br>
-
-
-
-
-
-
-<div class="container" id="restaurant-types">
-  <h2 class="pb-3 d-flex justify-content-center">Types of restaurant</h2>
+<div class="container pb-5" id="restaurant-types">
+  <h2 class="pb-3  pt-5 d-flex justify-content-center">Types of restaurant</h2>
 <div class="row">
 						<div class="col-12 col-sm-6 col-md-4 image-grid-item">
 							<div style="background-image: url(src/italian.jpg);" class="image-grid-cover">
@@ -51,8 +89,8 @@
 						<div class="col-12 col-sm-6 col-md-4 image-grid-item">
 							<div style="background-image: url(src/asador.jpg	);" class="entry-cover image-grid-cover has-image">
 								
-								<a href="/restaurants?type=asador&page=0" class="cover-wrapper" style="height: 100%">Asador</a>
-                <a href="/restaurants?type=asador&page=0" class="image-grid-clickbox"></a>
+								<a href="/restaurants?type=argentino&page=0" class="cover-wrapper" style="height: 100%">Argentino</a>
+                <a href="/restaurants?type=argentino&page=0" class="image-grid-clickbox"></a>
 							</div>
 						</div>
 						<div class="col-12 col-sm-6 col-md-4 image-grid-item">
@@ -63,93 +101,46 @@
 							</div>
 						</div>
 						<div class="col-12 col-sm-6 col-md-4 image-grid-item">
-							<div style="background-image: url(http://www.technocrazed.com/wp-content/uploads/2015/12/Airplane-wallpaper-112-640x360.jpg);" class="entry-cover image-grid-cover has-image">
+							<div style="background-image: url(src/frances.jpg)	;" class="entry-cover image-grid-cover has-image">
 								
-								<a href="#" class="cover-wrapper">Havalimanı Transferi</a>
-                <a href="#" class="image-grid-clickbox"></a>
+								<a href="/restaurants?type=frances&page=0" class="cover-wrapper">Francés</a>
+                <a href="/restaurants?type=frances&page=0" class="image-grid-clickbox"></a>
 							</div>
 						</div>
 						<div class="col-12 col-sm-6 col-md-4 image-grid-item">
-							<div style="background-image: url(https://img-s2.onedio.com/id-5738f74cb6efafb314a46f07/rev-0/w-600/h-300/s-d707c9ec5af8f66dc5506a2796ac14fce1fbb35b.jpg	);" class="entry-cover image-grid-cover has-image">
+							<div style="background-image: url(src/asturiano.jpg);" class="entry-cover image-grid-cover has-image">
 								
-								<a href="#" class="cover-wrapper">Günlük Seyahat</a>
-                <a href="#" class="image-grid-clickbox"></a>
+								<a href="/restaurants?type=asturiano&page=0" class="cover-wrapper">Asturiano</a>
+                <a href="/restaurants?type=asturiano&page=0" class="image-grid-clickbox"></a>
 							</div>
 						</div>
 						<div class="col-12 col-sm-6 col-md-4 image-grid-item">
-							<div style="background-image: url(https://image.stern.de/8205460/16x9-940-529/3c6ed305ea6e6f63c0454fda4dbc5d02/hx/pic-grand-calfornia-2018--9-.jpg	);" class="entry-cover image-grid-cover has-image">
+							<div style="background-image: url(src/arroceria.jpg		);" class="entry-cover image-grid-cover has-image">
 								
-								<a href="#" class="cover-wrapper">Karavan Kiralama </a>
-                <a href="#" class="image-grid-clickbox"></a>
+								<a href="/restaurants?type=arroceria&page=0" class="cover-wrapper">Arroceria </a>
+                <a href="/restaurants?type=arroceria&page=0" class="image-grid-clickbox"></a>
+							</div>
+						</div>
+            						<div class="col-12 col-sm-6 col-md-4 image-grid-item">
+							<div style="background-image: url(src/japones.jpg)	;" class="entry-cover image-grid-cover has-image">
+								
+								<a href="/restaurants?type=japones&page=0" class="cover-wrapper">Japonés</a>
+                <a href="/restaurants?type=japones&page=0" class="image-grid-clickbox"></a>
+							</div>
+						</div>
+						<div class="col-12 col-sm-6 col-md-4 image-grid-item">
+							<div style="background-image: url(src/chino.jpg);" class="entry-cover image-grid-cover has-image">
+								
+								<a href="/restaurants?type=chino&page=0" class="cover-wrapper">Chino</a>
+                <a href="/restaurants?type=chino&page=0" class="image-grid-clickbox"></a>
+							</div>
+						</div>
+						<div class="col-12 col-sm-6 col-md-4 image-grid-item">
+							<div style="background-image: url(src/americano.jpg		);" class="entry-cover image-grid-cover has-image">
+								
+								<a href="/restaurants?type=americano&page=0" class="cover-wrapper">Americano </a>
+                <a href="/restaurants?type=americano&page=0" class="image-grid-clickbox"></a>
 							</div>
 						</div>
 					</div>
 </div>
-
-
-
-<br>
-<ul id="type-restaurants">
-  <li><a href="restaurants">Todo</a></li>
-  <li><a href="restaurants?type=africano">Africano</a></li>
-  <li><a href="restaurants?type=aleman">Alemán</a></li>
-  <li><a href="restaurants?type=americano">Americano</a></li>
-  <li><a href="restaurants?type=andaluz">Andaluz</a></li>
-  <li><a href="restaurants?type=arabe">Árabe</a></li>
-  <li><a href="restaurants?type=argentino">Argentino</a></li>
-  <li><a href="restaurants?type=arroceria">Arrocería</a></li>
-  <li><a href="restaurants?type=asador">Asador</a></li>
-  <li><a href="restaurants?type=asiatico">Asiático</a></li>
-  <li><a href="restaurants?type=asturiano">Asturiano</a></li>
-  <li><a href="restaurants?type=belga">Belga</a></li>
-  <li><a href="restaurants?type=brasileno">Brasileño</a></li>
-
-</ul>
-<br><br>
-
-{{!-- Brasileño
-Camboyano
-Castellano
-Catalán
-Chino
-De mercado
-Colombiano
-Coreano
-Creativo
-Crepería
-Cubano
-De Fusión
-Egipcio
-Español
-Etíope
-Europa del Este
-Extremeño
-Francés
-Gallego
-Griego
-Indio
-Inglés
-Internacional
-Iraní
-Italiano
-Japonés
-Latino
-Libanés
-Marisquería
-Marroquí
-Mediterráneo
-Mexicano
-Navarro
-Peruano
-Portugués
-Ruso
-Suizo
-Tailandés
-Turco
-Valenciano
-Vasco
-Vegetariano
-Vietnamita --}}
-
-
-
