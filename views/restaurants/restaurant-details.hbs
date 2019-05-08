@@ -1,0 +1,52 @@
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb arr-right">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="javascript:window.history.go(-1);">Results</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Details</li>
+  </ol>
+</nav>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-sm">
+        <img style="width:370px;"  src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=370&photoreference={{restaurantDetails.photos.[0].photo_reference}}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw">
+    </div>
+    <div class="col-sm">
+      <p><h2>{{restaurantDetails.name}} <span class="price{{restaurantDetails.price_level}}"></span></h2></p>
+      <p>{{restaurantDetails.vicinity}}</p>
+      <p>{{restaurantDetails.rating}} ({{restaurantDetails.user_ratings_total}} reviews)</p>
+      <p><a class="btn btn-primary mr-2" href="tel:{{restaurantDetails.formatted_phone_number}}">{{restaurantDetails.formatted_phone_number}}</a>
+      <a class="btn btn-secondary" href="{{restaurantDetails.website}}">Web</a> 
+      <span id="favoriteContainer"></span>
+    </div>
+  </div>
+
+  <div class="d-flex flex-row flex-wrap" style="width:370px;">
+  {{#each restaurantDetails.photos}}
+    <div class="imagen-galleria">
+      <a href="https://maps.googleapis.com/maps/api/place/photo?maxwidth=1000&photoreference={{this.photo_reference}}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw" data-lightbox="example-1">
+        <img style="padding-right:10px; padding-bottom:10px;" src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=100&photoreference={{this.photo_reference}}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw">
+      </a>
+    </div>
+  {{/each}} 
+  </div>
+
+
+</div>
+
+{{!-- <img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={{restaurantDetails.photos.[0].photo_reference}}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw"> --}}
+<p><h2>{{restaurantDetails.name}} <span class="price{{restaurantDetails.price_level}}"></span></h2> </p>
+<p></p>
+<p>{{restaurantDetails.vicinity}}</p>
+<p>{{restaurantDetails.rating}} ({{restaurantDetails.user_ratings_total}} reviews)</p>
+<p><a class="btn btn-primary mr-2" href="tel:{{restaurantDetails.formatted_phone_number}}">{{restaurantDetails.formatted_phone_number}}</a>
+<a class="btn btn-secondary" href="{{restaurantDetails.website}}">Web</a> 
+<span id="favoriteContainer" class="{{favoriteStatus}}">{{favoriteStatus}}</span>
+
+
+<div id="favoriteForm"></div>
+
+<script type="text/javascript" src="../javascript/dist/js/lightbox.min.js"></script> 
+<script type="text/javascript" src="../javascript/favorites.js"></script> 
