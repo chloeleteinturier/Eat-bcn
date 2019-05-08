@@ -92,7 +92,8 @@ router.get('/details', (req, res, next) => {
         const restaurantDetails = response.data.result;
         const data = {
           restaurantDetails,
-          favoriteStatus: 'off'
+          favoriteStatus: 'off',
+          user: false
         };
 
         res.render('restaurants/restaurant-details', data);
