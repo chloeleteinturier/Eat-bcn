@@ -21,6 +21,10 @@
       <a class="btn btn-secondary" href="{{restaurantDetails.website}}">Web</a> 
       <span id="favoriteContainer" class="{{favoriteStatus}}"></span>
       <input type="hidden" id="user" value="{{user}}">
+
+           {{#each restaurantDetails.reviews}}
+    <p></p>{{author_name}}</p>
+  {{/each}} 
     </div>
   </div>
 
@@ -33,6 +37,7 @@
     </div>
   {{/each}} 
   </div>
+
 
 
 </div>
