@@ -14,6 +14,7 @@ favoriteContainer.addEventListener('click', (e) => {
     placeId,
     status: favoriteStatus
   });
+
   if (favoriteStatus === 'off') {
     favoriteContainer.innerHTML = '<a id="favorite" class="btn btn-secondary ml-1"><img src="/src/favorite-on.svg"></a>';
     favoriteStatus = 'on';

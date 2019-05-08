@@ -57,75 +57,51 @@ router.get('/', (req, res, next) => {
 
 /* GET restaurants listing. */
 router.get('/details', (req, res, next) => {
-  const { place_id } = req.query;
+  const currentPlaceId = req.query.place_id;
 
-  axios.get(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${place_id}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw`)
+  axios.get(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${currentPlaceId}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw`)
     .then(function (response) {
-      const restaurantDetails = response.data.result;
-      const userId = req.session.currentUser._id;
-      let favoriteStatus;
+      if (req.session.currentUser) {
+        const restaurantDetails = response.data.result;
+        const userId = req.session.currentUser._id;
+        let favoriteStatus = 'off';
 
-      User.find({ _id: userId }, { favorites: 1, _id: 0 })
-      // .then((user) => {
-      //   Promise.all(user[0].favorites.map((element) => {
-      //     return Favorite.find({ _id: element, place_id });
-      //   }))
+        User.find({ _id: userId })
+          .then((user) => {
+            Promise.all(user[0].favorites.map((element) => {
+              return Favorite.findOne({ _id: element, place_id: currentPlaceId });
+            }))
+              .then((result) => {
+                Promise.all(result.map((place) => {
+                  if (place !== null) {
+                    favoriteStatus = 'on';
+                    return favoriteStatus;
+                  }
+                }))
+                  .then((status) => {
+                    const data = {
+                      restaurantDetails,
+                      favoriteStatus
+                    };
 
-        .then((user) => {
-          if (user) {
-            console.log('user[0].favorites', user[0].favorites);
-            console.log('user[0].favorites.length', user[0].favorites.length);
-            console.log('user', user);
+                    res.render('restaurants/restaurant-details', data);
+                  });
+              });
+          });
+      } else {
+        const restaurantDetails = response.data.result;
+        const data = {
+          restaurantDetails,
+          favoriteStatus: 'off'
+        };
 
-            favoriteStatus = 'on';
-          } else {
-            // console.log('user[0].favorites', user[0].favorites);
-            // console.log('user[0].favorites.length', user[0].favorites.length);
-            console.log('user', user);
-
-            favoriteStatus = 'off';
-          }
-
-          console.log('favoriteStatus', favoriteStatus);
-
-          const data = {
-            restaurantDetails,
-            favoriteStatus
-          };
-          res.render('restaurants/restaurant-details', data);
-        });
-      // });
+        res.render('restaurants/restaurant-details', data);
+      }
     })
+
     .catch(function (error) {
       next(error);
     });
 });
 
 module.exports = router;
-
-// Favorite.find({ place_id })
-// .then((favorites) => {
-//   Promise.all(favorites.map((element) => {
-//     return User.find({ _id: userId }, { favorites: element._id });
-//   }))
-//     .then((user) => {
-//       if (user.length) {
-//         console.log('user.length', user.length);
-
-//         favoriteStatus = 'on';
-//       } else {
-//         console.log('user.length', user.length);
-
-//         favoriteStatus = 'off';
-//       }
-//       console.log('user', user);
-
-//       console.log('favoriteStatus', favoriteStatus);
-
-//       const data = {
-//         restaurantDetails,
-//         favoriteStatus
-//       };
-//       res.render('restaurants/restaurant-details', data);
-//     });
-// });
