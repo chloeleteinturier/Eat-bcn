@@ -53,7 +53,7 @@
 <p>{{restaurantDetails.rating}} ({{restaurantDetails.user_ratings_total}} reviews)</p>
 <p><a class="btn btn-primary mr-2" href="tel:{{restaurantDetails.formatted_phone_number}}">{{restaurantDetails.formatted_phone_number}}</a>
 <a class="btn btn-secondary" href="{{restaurantDetails.website}}">Web</a> 
-<span id="favoriteContainer"></span>
+<span id="favoriteContainer" class="{{favoriteStatus}}">{{favoriteStatus}}</span>
 
 {{!-- <div style="display:grid;">
 {{#each restaurantDetails.photos}}

@@ -2,20 +2,14 @@
 
 let favoriteContainer = document.getElementById('favoriteContainer');
 
-let favoriteStatus = 'off';
+let favoriteStatus = favoriteContainer.className;
 let favoritePhoto = `<a id="favorite" class="btn btn-secondary ml-1"><img src="/src/favorite-${favoriteStatus}.svg"></a>`;
 
 let placeId = window.location.search.slice(10);
 
-// let favoriteFormHtml = `
-// <form method="POST" action="../api" id="hiddenForm">
-// <input type="hidden" name="placeId" value="${placeId}" />
-// <input type="hidden" name="status" value="${favoriteStatus}" />
-// </form>
-// `;
-
 favoriteContainer.addEventListener('click', (e) => {
   e.preventDefault();
+
   axios.post('http://localhost:3000/api', {
     placeId,
     status: favoriteStatus
@@ -30,6 +24,5 @@ favoriteContainer.addEventListener('click', (e) => {
 });
 
 window.addEventListener('load', function (event) {
-  // console.log(favoriteContainer);
   favoriteContainer.innerHTML = favoritePhoto;
 });

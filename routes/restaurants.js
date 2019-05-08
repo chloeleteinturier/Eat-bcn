@@ -4,8 +4,6 @@ const axios = require('axios'); // to use the API
 const User = require('../models/user');
 const Favorite = require('../models/favorites');
 
-// const feedPhoto = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=`;
-
 /* GET restaurants listing. */
 router.get('/', (req, res, next) => {
   const { type, price, pagetoken, page } = req.query;
@@ -19,22 +17,6 @@ router.get('/', (req, res, next) => {
     .then(function (response) {
       const newRestaurants = response.data;
 
-      // for (var i = 0; i < restaurants.length; i++) {
-      //   // console.log(restaurants[i].photos[0].photo_reference);
-      //   newRestaurants.push({
-      //     name: response.data.results[i].name,
-      //     place_id: response.data.results[i].place_id,
-      //     price_level: response.data.results[i].price_level,
-      //     rating: response.data.results[i].rating,
-      //     user_ratings_total: response.data.results[i].user_ratings_total,
-      //     next_page_token: response.data.next_page_token,
-      //     type: type,
-      //     price: price,
-      //     main_photo: `${feedPhoto}${response.data.results[i].photos[0].photo_reference}&key=${process.env.API_KEY}`
-      //   });
-      // }
-      // console.log(price);
-
       newRestaurants.type = type;
       newRestaurants.price = price;
       newRestaurants.page = 0;
@@ -45,7 +27,6 @@ router.get('/', (req, res, next) => {
       }
 
       if (parseInt(price) === 1) {
-        // console.log('in');
         newRestaurants.price1 = true;
         newRestaurants.price2 = false;
         newRestaurants.price3 = false;
@@ -67,35 +48,84 @@ router.get('/', (req, res, next) => {
         newRestaurants.price4 = true;
       }
 
-      // console.log(newRestaurants.price1, newRestaurants.price2, newRestaurants.price3, newRestaurants.price4);
-
-      for (var i = 0; i < newRestaurants.results.length; i++) {
-        // console.log(restaurants[i].photos[0].photo_reference);
-        // console.log(newRestaurants.results[i].photos[0].photo_reference);
-      }
-
       res.render('restaurants/restaurant-list', { newRestaurants });
     })
     .catch(function (error) {
-      console.log(error);
+      next(error);
     });
 });
 
 /* GET restaurants listing. */
 router.get('/details', (req, res, next) => {
   const { place_id } = req.query;
-  // console.log(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${place_id}&key=${process.env.API_KEY}`);
+
   axios.get(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${place_id}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw`)
     .then(function (response) {
       const restaurantDetails = response.data.result;
       const userId = req.session.currentUser._id;
-      // Favorite.findById(place_id);
-      // console.log(restaurantDetails);
-      res.render('restaurants/restaurant-details', { restaurantDetails });
+      let favoriteStatus;
+
+      User.find({ _id: userId }, { favorites: 1, _id: 0 })
+      // .then((user) => {
+      //   Promise.all(user[0].favorites.map((element) => {
+      //     return User.find({ _id: userId }, { favorites: element });
+      //   }))
+
+        .then((user) => {
+          if (user) {
+            console.log('user[0].favorites', user[0].favorites);
+            console.log('user[0].favorites.length', user[0].favorites.length);
+            // console.log('user', user);
+
+            favoriteStatus = 'on';
+          } else {
+            // console.log('user[0].favorites', user[0].favorites);
+            // console.log('user[0].favorites.length', user[0].favorites.length);
+            console.log('user', user);
+
+            favoriteStatus = 'off';
+          }
+
+          console.log('favoriteStatus', favoriteStatus);
+
+          const data = {
+            restaurantDetails,
+            favoriteStatus
+          };
+          res.render('restaurants/restaurant-details', data);
+        });
+      // });
     })
     .catch(function (error) {
-      console.log(error);
+      next(error);
     });
 });
 
 module.exports = router;
+
+// Favorite.find({ place_id })
+// .then((favorites) => {
+//   Promise.all(favorites.map((element) => {
+//     return User.find({ _id: userId }, { favorites: element._id });
+//   }))
+//     .then((user) => {
+//       if (user.length) {
+//         console.log('user.length', user.length);
+
+//         favoriteStatus = 'on';
+//       } else {
+//         console.log('user.length', user.length);
+
+//         favoriteStatus = 'off';
+//       }
+//       console.log('user', user);
+
+//       console.log('favoriteStatus', favoriteStatus);
+
+//       const data = {
+//         restaurantDetails,
+//         favoriteStatus
+//       };
+//       res.render('restaurants/restaurant-details', data);
+//     });
+// });
