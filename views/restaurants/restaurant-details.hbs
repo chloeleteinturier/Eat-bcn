@@ -10,33 +10,52 @@
 <div class="container">
 
   <div class="row">
-    <div class="col-sm">
+    <div class="pr-4 pl-4 pb-4">
         <img style="width:370px;"  src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=370&photoreference={{restaurantDetails.photos.[0].photo_reference}}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw">
+        <div class="d-flex flex-row flex-wrap" style="width:370px;">
+        {{#each restaurantDetails.photos}}
+        <div class="imagen-galleria">
+          <a href="https://maps.googleapis.com/maps/api/place/photo?maxwidth=1000&photoreference={{this.photo_reference}}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw" data-lightbox="example-1">
+            <img style="padding-right:10px; padding-bottom:10px;" src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=100&photoreference={{this.photo_reference}}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw">
+          </a>
+        </div>
+        {{/each}} 
     </div>
-    <div class="col-sm">
-      <p><h2>{{restaurantDetails.name}} <span class="price{{restaurantDetails.price_level}}"></span></h2></p>
-      <p>{{restaurantDetails.vicinity}}</p>
-      <p>{{restaurantDetails.rating}} ({{restaurantDetails.user_ratings_total}} reviews)</p>
-      <p><a class="btn btn-primary mr-2" href="tel:{{restaurantDetails.formatted_phone_number}}">{{restaurantDetails.formatted_phone_number}}</a>
+  </div>
+  <div class="col pl-4">
+    <h2>{{restaurantDetails.name}} <small class="price{{restaurantDetails.price_level}}"></small></h2>
+    <p>{{restaurantDetails.vicinity}}</p>
+    {{!-- <p>{{restaurantDetails.rating}} ({{restaurantDetails.user_ratings_total}} reviews)</p> --}}
+    <p><a class="btn btn-primary mr-2" href="tel:{{restaurantDetails.formatted_phone_number}}">{{restaurantDetails.formatted_phone_number}}</a>
+    
       <a class="btn btn-secondary" href="{{restaurantDetails.website}}">Web</a> 
       <span id="favoriteContainer" class="{{favoriteStatus}}"></span>
       <input type="hidden" id="user" value="{{user}}">
+    </p>
 
-           {{#each restaurantDetails.reviews}}
-    <p></p>{{author_name}}</p>
-  {{/each}} 
+      <h3 style="padding-top:50px;">{{restaurantDetails.user_ratings_total}} reviews <small>({{restaurantDetails.rating}})</small></h3>
+      {{#each restaurantDetails.reviews}}
+
+       <div class="card review">
+          <div class="card-body">
+            	<div class="row">
+                <div class="col-md-2">
+                    <img src="{{profile_photo_url}}" class="img img-rounded img-fluid">
+                    <p class="text-secondary text-center"></p>
+                    </div>
+                    <div class="col-md-10">
+                    	<p><a href="{{author_url}}">
+                        <strong>{{this.author_name}}</strong></a> <small>({{rating}})</small></p>
+                    	<p>{{text}}</p>
+                  </div>
+            	</div>
+          </div>
+	      </div>
+      {{/each}} 
     </div>
   </div>
 
-  <div class="d-flex flex-row flex-wrap" style="width:370px;">
-  {{#each restaurantDetails.photos}}
-    <div class="imagen-galleria">
-      <a href="https://maps.googleapis.com/maps/api/place/photo?maxwidth=1000&photoreference={{this.photo_reference}}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw" data-lightbox="example-1">
-        <img style="padding-right:10px; padding-bottom:10px;" src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=100&photoreference={{this.photo_reference}}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw">
-      </a>
-    </div>
-  {{/each}} 
-  </div>
+
 
 
 

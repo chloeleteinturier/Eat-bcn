@@ -106,25 +106,33 @@ header h2{
   background-color:#eee;
 }
 
-
+.review a:hover, .review:hover, .review {
+  background-color:white;
+  border:0px solid transparent ;
+  border-bottom:1px solid#eee;
+}
 
 
 .price1:after{
+  color:grey;
   content: "$";
 }
 
 .price2:after{
+  color:grey;
   content: "$$";
 }
 
 
 .price3:after{
+  color:grey;
   content: "$$$";
   
 }
 
 
 .price4:after{
+  color:grey;
   content: "$$$$";
 }
 
