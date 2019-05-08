@@ -4,24 +4,27 @@
     <li class="breadcrumb-item active" aria-current="page">Your favorites</li>
   </ol>
 </nav>
-<div class="containter">
-  <h1>Your favorites</h1>
-
-  <div class="card mb-3">
-    <div class="row no-gutters">
-      <div class="col-md-2 my-card">
-        <a href="restaurants/details?place_id={{this.place_id}}" class="stretched-link"></a>
-          <img src=" https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={{this.photos.[0].photo_reference}}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw" class="card-img" alt="...">
-        </a>
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title"><a href="restaurants/details?place_id={{this.place_id}}" class="stretched-link">{{this.name}}</a> <small class="text-muted"><span class="price{{this.price_level}}"><span></small></h5>
-          <p class="card-text"><strong>{{this.rating}}</strong> ({{this.user_ratings_total}} reviews)</p>
+<div class="container" id="restaurant-list">
+  <h2 class="pt-2 pb-1">Your favorites</h2>
+  {{#if favorites}}
+  {{#each favorites }}
+    <div class="card mb-3">
+      <div class="row no-gutters">
+        <div class="col-md-2 my-card">
+          <a href="restaurants/details?place_id={{this.place_id}}" class="stretched-link"></a>
+            <img src=" https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={{this.photos.[0].photo_reference}}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw" class="card-img" alt="...">
+          </a>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"><a href="restaurants/details?place_id={{this.place_id}}" class="stretched-link">{{this.name}}</a> <small class="text-muted"><span class="price{{this.price_level}}"><span></small></h5>
+            <p class="card-text"><strong>{{this.rating}}</strong> ({{this.user_ratings_total}} reviews)</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-
-
+  {{/each}}
+  {{else}}
+  <div class="alert alert-primary" role="alert">No favorites yet ;)</div>
+  {{/if}}
 </div>
