@@ -11,7 +11,7 @@ favoriteContainer.addEventListener('click', (e) => {
   e.preventDefault();
   console.log(user);
   if (user === 'true') {
-    axios.post('http://localhost:3000/api', {
+    axios.post('/api', {
       placeId,
       status: favoriteStatus
     });
