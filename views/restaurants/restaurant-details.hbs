@@ -28,7 +28,7 @@
     {{!-- <p>{{restaurantDetails.rating}} ({{restaurantDetails.user_ratings_total}} reviews)</p> --}}
     <p><a class="btn btn-primary mr-2" href="tel:{{restaurantDetails.formatted_phone_number}}">{{restaurantDetails.formatted_phone_number}}</a>
     
-      <a class="btn btn-secondary" href="{{restaurantDetails.website}}">Web</a> 
+      <a class="btn btn-secondary" href="{{restaurantDetails.website}}"  target="_blank">Web</a> 
       <span id="favoriteContainer" class="{{favoriteStatus}}"></span>
       <input type="hidden" id="user" value="{{user}}">
     </p>
@@ -40,11 +40,11 @@
           <div class="card-body">
             	<div class="row">
                 <div class="col-md-1">
-                    <a href="{{author_url}}"><img src="{{profile_photo_url}}" class="img img-rounded" style="width:40px;"></a>
+                    <a href="{{author_url}}"  target="_blank"><img src="{{profile_photo_url}}"  class="img img-rounded" style="width:40px;"></a>
                     <p class="text-secondary text-center"></p>
                     </div>
                     <div class="col-md-11">
-                    	<p><a href="{{author_url}}">
+                    	<p><a href="{{author_url}}" target="_blank">
                         <strong>{{this.author_name}}</strong></a> <small>({{rating}})</small></p>
                     	<p>{{text}}</p>
                   </div>
