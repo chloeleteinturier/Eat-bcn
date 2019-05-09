@@ -81,7 +81,8 @@ router.get('/details', (req, res, next) => {
                   .then((status) => {
                     const data = {
                       restaurantDetails,
-                      favoriteStatus
+                      favoriteStatus,
+                      user: true
                     };
 
                     res.render('restaurants/restaurant-details', data);

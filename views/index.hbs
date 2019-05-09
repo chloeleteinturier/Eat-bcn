@@ -10,12 +10,9 @@
     
     <form action="/restaurants"  method="get" class="form-inline pt-4">
         <div class="form-row align-items-center">
-          {{!-- <div class="col-auto">
-            <input type="text" class="form-control-lg mr-sm-1" id="inlineFormInput" placeholder="Search by keyword"  >
-          </div> --}}
           <div class="col-auto">
-            <select class="form-control-lg " id="exampleFormControlSelect1" name="type">
-              <option>What do you want to eat?</option>
+            <select class="form-control " id="exampleFormControlSelect1" name="type">
+              <option value="">What do you want to eat?</option>
               <option value="italian">Italian</option>
               <option value="africano">Africano</option>
               <option value="aleman">Alemán</option>
@@ -69,7 +66,7 @@
           </div>
           <div class="col-auto">
             <input type="hidden" value="0" name="page">
-            <button type="submit" class="btn btn-primary  btn-lg my-2 my-sm-0">Search</button>
+            <button type="submit" class="btn btn-primary my-2 my-sm-0">Search</button>
           </div>
         </div>
       </form>

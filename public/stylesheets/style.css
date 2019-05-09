@@ -2,6 +2,7 @@ body {
   /* background-color:#eee; */
 }
 
+
 a {
   color: #6927ff;
 }
@@ -194,7 +195,7 @@ header h2{
 
 
 
-@media (min-width: 400px) { 
+@media (min-width: 100px) { 
   .my-card{  
   max-height: 200px;
   overflow: hidden; 
@@ -211,7 +212,7 @@ header h2{
 
 @media (min-width: 768px) { 
   .my-card{  
-    max-height: 200px;
+    max-height: 100px;
     overflow: hidden; 
     }
     .card-img{
@@ -223,7 +224,7 @@ header h2{
 
 @media (min-width: 992px) { 
   .my-card{  
-    max-height: 200px;
+    max-height: 100px;
     overflow: hidden; 
     }
  }
@@ -238,6 +239,8 @@ header h2{
 
  footer{
    margin-top:50px;
+   clear:both;
+   
  }
 
 
@@ -262,3 +265,4 @@ header h2{
    margin-right:10px;
 
  }
+
