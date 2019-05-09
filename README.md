@@ -70,7 +70,7 @@ Favorites model
 
 ## Backlog
 
-See the Trello board.
+[See the Trello board.](https://trello.com/b/Ni3giVKf/ironhackproject)
 
 ## Links
 
@@ -86,4 +86,4 @@ The url to your repository and to your deployed project
 
 The url to your presentation slides
 
-[Slides Link](http://slides.com)
+[Slides Link](https://docs.google.com/presentation/d/1P5FIi0vHZBUcgUtmt1M4_lLCO5dwdJ4UOgtJa4ehGfk/edit?usp=sharing)
