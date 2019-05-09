@@ -78,9 +78,9 @@ See the Trello board.
 
 The url to your repository and to your deployed project
 
-[Repository Link](http://github.com)
+[Repository Link](https://github.com/chloeleteinturier/Eat-bcn/tree/dev)
 
-[Deploy Link](http://heroku.com)
+[Deploy Link](https://eat-bcn.herokuapp.com/)
 
 ### Slides
 
