@@ -37,14 +37,18 @@ router.get('/favorites', (req, res, next) => {
           .then(() => {
             // second promise to access axios
             Promise.all(placeIdArr.map((element) => {
-              return axios.get(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${element}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw`)
+              return axios.get(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${element}&key=${process.env.API_KEY}`)
                 .then((favorites) => {
                   favArr.push(favorites.data.result);
                 })
                 .catch((err) => next(err));
             }))
               .then(() => {
-                res.render('private/favorites', { favorites: favArr });
+                const data = {
+                  favorites: favArr,
+                  apiKey: process.env.API_KEY
+                };
+                res.render('private/favorites', data);
               })
               .catch((err) => next(err));
           })

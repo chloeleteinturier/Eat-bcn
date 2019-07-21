@@ -13,7 +13,7 @@ router.get('/', (req, res, next) => {
     pagetokenParam = 'pagetoken=' + pagetoken + '&';
   }
 
-  axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?page=${page}&${pagetokenParam}maxprice=${price}&minprice=${price}&keyword=${type}&location=41.387098,%202.165746&radius=5000&type=restaurant&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw`)
+  axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?page=${page}&${pagetokenParam}maxprice=${price}&minprice=${price}&keyword=${type}&location=41.387098,%202.165746&radius=5000&type=restaurant&key=${process.env.API_KEY}`)
     .then(function (response) {
       const newRestaurants = response.data;
 
@@ -47,7 +47,7 @@ router.get('/', (req, res, next) => {
         newRestaurants.price3 = false;
         newRestaurants.price4 = true;
       }
-
+      console.log(newRestaurants);
       res.render('restaurants/restaurant-list', { newRestaurants });
     })
     .catch(function (error) {
@@ -59,7 +59,7 @@ router.get('/', (req, res, next) => {
 router.get('/details', (req, res, next) => {
   const currentPlaceId = req.query.place_id;
 
-  axios.get(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${currentPlaceId}&key=AIzaSyCjoxAmGGvyGMVLx8jHkzSQTdfz8F1rknw`)
+  axios.get(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${currentPlaceId}&key=${process.env.API_KEY}`)
     .then(function (response) {
       if (req.session.currentUser) {
         const restaurantDetails = response.data.result;

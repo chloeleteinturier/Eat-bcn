@@ -25,6 +25,7 @@ app.set('view engine', 'hbs');
 
 // connect moongoose
 mongoose.connect(process.env.MONGODB_URI, {
+  useCreateIndex: true,
   keepAlive: true,
   useNewUrlParser: true,
   reconnectTries: Number.MAX_VALUE
