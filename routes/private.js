@@ -39,14 +39,15 @@ router.get('/favorites', (req, res, next) => {
             Promise.all(placeIdArr.map((element) => {
               return axios.get(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${element}&key=${process.env.API_KEY}`)
                 .then((favorites) => {
-                  favArr.push(favorites.data.result);
+                  const favorite = favorites.data.result;
+                  favorite.apiKey = process.env.API_KEY;
+                  favArr.push(favorite);
                 })
                 .catch((err) => next(err));
             }))
               .then(() => {
                 const data = {
-                  favorites: favArr,
-                  apiKey: process.env.API_KEY
+                  favorites: favArr
                 };
                 res.render('private/favorites', data);
               })

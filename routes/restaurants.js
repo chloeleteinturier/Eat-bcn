@@ -17,6 +17,10 @@ router.get('/', (req, res, next) => {
     .then(function (response) {
       const newRestaurants = response.data;
 
+      newRestaurants.results.forEach((ele) => {
+        ele.apiKey = process.env.API_KEY;
+      });
+
       newRestaurants.type = type;
       newRestaurants.price = price;
       newRestaurants.page = 0;
@@ -47,7 +51,6 @@ router.get('/', (req, res, next) => {
         newRestaurants.price3 = false;
         newRestaurants.price4 = true;
       }
-      console.log(newRestaurants);
       res.render('restaurants/restaurant-list', { newRestaurants });
     })
     .catch(function (error) {
@@ -55,7 +58,7 @@ router.get('/', (req, res, next) => {
     });
 });
 
-/* GET restaurants listing. */
+/* GET restaurant details. */
 router.get('/details', (req, res, next) => {
   const currentPlaceId = req.query.place_id;
 
@@ -63,6 +66,12 @@ router.get('/details', (req, res, next) => {
     .then(function (response) {
       if (req.session.currentUser) {
         const restaurantDetails = response.data.result;
+
+        console.log(restaurantDetails.photos);
+        restaurantDetails.photos.forEach((ele) => {
+          ele.apiKey = process.env.API_KEY;
+        });
+
         const userId = req.session.currentUser._id;
         let favoriteStatus = 'off';
 
