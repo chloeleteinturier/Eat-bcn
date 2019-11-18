@@ -64,14 +64,13 @@ router.get('/details', (req, res, next) => {
 
   axios.get(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${currentPlaceId}&key=${process.env.API_KEY}`)
     .then(function (response) {
+      const restaurantDetails = response.data.result;
+
+      console.log(restaurantDetails.photos);
+      restaurantDetails.photos.forEach((ele) => {
+        ele.apiKey = process.env.API_KEY;
+      });
       if (req.session.currentUser) {
-        const restaurantDetails = response.data.result;
-
-        console.log(restaurantDetails.photos);
-        restaurantDetails.photos.forEach((ele) => {
-          ele.apiKey = process.env.API_KEY;
-        });
-
         const userId = req.session.currentUser._id;
         let favoriteStatus = 'off';
 
@@ -99,7 +98,6 @@ router.get('/details', (req, res, next) => {
               });
           });
       } else {
-        const restaurantDetails = response.data.result;
         const data = {
           restaurantDetails,
           favoriteStatus: 'off',
