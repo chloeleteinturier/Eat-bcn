@@ -21,7 +21,7 @@ Search for restaurant in Barcelona and add them in a favorite list.
 ## Routes:
 
 | Method | Route | Description|
-|------|-------|------------|
+|--------|-------|------------|
 
 | GET  | /     | Main page route. Render home view.
 
